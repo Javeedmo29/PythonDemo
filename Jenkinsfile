@@ -21,7 +21,7 @@ pipeline {
       steps{
         script {
             
-          sh "docker login -u=javeedmo29 -p =Javeed@90"
+          sh "docker login -u='javeedmo29' -p ='Javeed@90'"
           //  docker.withRegistry( '', registryCredential ) {
             dockerImage.push()
        }
