@@ -77,9 +77,9 @@ pipeline {
             allowMissing: false,
             alwaysLinkToLastBuild: false,
             keepAll: true,
-            reportDir: '/var/jenkins_home/workspace/alpha',
-            reportFiles: 'arachni-report.html',
-            reportName: 'arachni-report.html'
+            portDir: 'coverage',
+            reportFiles: 'index.html',
+            reportName: 'RCov Report'
           ]
         }
         }
