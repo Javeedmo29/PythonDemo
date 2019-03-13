@@ -71,15 +71,18 @@ pipeline {
        stage('ARACHNI Scanning') {
          steps {
             arachniScanner checks: '*', scope: [pageLimit: 3], url: 'http://52.172.54.204:8000/posts/', userConfig: [filename: 'myConfiguration.json'], format: 'html'
-        
+        post {
+        success {
          publishHTML target: [
             allowMissing: false,
             alwaysLinkToLastBuild: false,
             keepAll: true,
             reportDir: '/var/jenkins_home/workspace/alpha',
-            reportFiles: 'arachni-report.json',
-            reportName: 'arachni-report.json'
+            reportFiles: 'arachni-report.html',
+            reportName: 'arachni-report.html'
           ]
+        }
+        }
  
          }
       }
