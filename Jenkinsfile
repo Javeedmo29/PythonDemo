@@ -70,7 +70,7 @@ pipeline {
 
        stage('ARACHNI Scanning') {
          steps {
-            arachniScanner checks: '*', scope: [pageLimit: 3], url: 'http://52.172.54.204:8000/posts/', userConfig: [filename: 'myConfiguration.json'], format: 'json'
+            arachniScanner checks: '*', scope: [pageLimit: 3], url: 'http://52.172.54.204:8000/posts/', userConfig: [filename: 'myConfiguration.json'], format: 'html'
          }
       }
 
