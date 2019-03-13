@@ -35,8 +35,8 @@ pipeline {
         }
     }
        
-       stage("Sonar scanner"){
-          steps{
+   /*   stage("Sonar scanner"){
+       steps{
             sh"/opt/sonar/bin/sonar-scanner \
   -Dsonar.projectKey=aaa \
   -Dsonar.sources=. \
@@ -44,7 +44,7 @@ pipeline {
   -Dsonar.login=221209a103baa6816ed58bc2f92889f488342f70"
          
           }
-       }
+       }*/
       stage('Cleanup') {
       when {
                 not { environment ignoreCase: true, name: 'containerId', value: '' }
