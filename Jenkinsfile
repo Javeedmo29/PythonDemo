@@ -71,7 +71,7 @@ pipeline {
        stage('ARACHNI Scanning') {
          steps {
             arachniScanner checks: '*', scope: [pageLimit: 3], url: 'http://52.172.25.128:8000/posts/', userConfig: [filename: 'myConfiguration.json'], format: 'json'
-            step([$class: 'ArtifactArchiver', artifacts: 'alpha/arachni-report.json'])
+            step([$class: 'ArtifactArchiver', artifacts: 'arachni-report.json'])
 
             
             /*    post {
