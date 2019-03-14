@@ -8,7 +8,7 @@ pipeline {
   agent any
     stages 
     {
-        stage('Building image') {
+        /*stage('Building image') {
       steps{
         script {
           //will pisck registry from variable defined
