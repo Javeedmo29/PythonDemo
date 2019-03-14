@@ -27,7 +27,7 @@ pipeline {
        }
       }
     }
-     
+/*
        stage('Aqua MicroScanner') {
         steps{
        aquaMicroscanner imageName:'7459f109dc97', notCompliesCmd: 'exit 1', onDisallowed: 'fail', outputFormat: 'html'
@@ -70,8 +70,8 @@ pipeline {
 
        stage('ARACHNI Scanning') {
          steps {
-            arachniScanner checks: '*', scope: [pageLimit: 3], url: 'http://52.172.54.204:8000/posts/', userConfig: [filename: 'myConfiguration.json'], format: 'html'
-        post {
+            arachniScanner checks: '*', scope: [pageLimit: 3], url: 'http://52.172.25.128:8000/posts/', userConfig: [filename: 'myConfiguration.json'], format: 'html'
+    /*    post {
         success {
          publishHTML target: [
             allowMissing: false,
@@ -82,8 +82,9 @@ pipeline {
             reportName: 'RCov Report'
           ]
         }
+        
         }
- 
+*/ 
          }
       }
 
