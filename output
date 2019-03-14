@@ -1,0 +1,243 @@
+{
+  "version" : "1.5.1",
+  "seed" : "6b1a57b3e9438abf9516a33d4967cd80",
+  "options" : {
+    "audit" : {
+      "parameter_values" : true,
+      "exclude_vector_patterns" : [],
+      "include_vector_patterns" : [],
+      "link_templates" : []
+    },
+    "browser_cluster" : {
+      "local_storage" : {},
+      "wait_for_elements" : {},
+      "pool_size" : 6,
+      "job_timeout" : 10,
+      "worker_time_to_live" : 100,
+      "ignore_images" : false,
+      "screen_width" : 1600,
+      "screen_height" : 1200
+    },
+    "datastore" : {
+      "report_path" : null,
+      "token" : "ab0b3de47e3be6cd713814af71230dfd"
+    },
+    "http" : {
+      "user_agent" : "Arachni/v1.5.1",
+      "request_timeout" : 10000,
+      "request_redirect_limit" : 5,
+      "request_concurrency" : 20,
+      "request_queue_size" : 100,
+      "request_headers" : {},
+      "response_max_size" : 500000,
+      "cookies" : {},
+      "authentication_type" : "auto"
+    },
+    "input" : {
+      "values" : {},
+      "default_values" : {
+        "name" : "arachni_name",
+        "user" : "arachni_user",
+        "usr" : "arachni_user",
+        "pass" : "5543!%arachni_secret",
+        "txt" : "arachni_text",
+        "num" : "132",
+        "amount" : "100",
+        "mail" : "arachni@email.gr",
+        "account" : "12",
+        "id" : "1"
+      },
+      "without_defaults" : false,
+      "force" : false
+    },
+    "scope" : {
+      "redundant_path_patterns" : {},
+      "dom_depth_limit" : 5,
+      "exclude_file_extensions" : [],
+      "exclude_path_patterns" : [],
+      "exclude_content_patterns" : [],
+      "include_path_patterns" : [],
+      "restrict_paths" : [],
+      "extend_paths" : [],
+      "url_rewrites" : {},
+      "page_limit" : 3
+    },
+    "session" : {},
+    "checks" : [
+      "code_injection",
+      "code_injection_php_input_wrapper",
+      "code_injection_timing",
+      "csrf",
+      "file_inclusion",
+      "ldap_injection",
+      "no_sql_injection",
+      "no_sql_injection_differential",
+      "os_cmd_injection",
+      "os_cmd_injection_timing",
+      "path_traversal",
+      "response_splitting",
+      "rfi",
+      "session_fixation",
+      "source_code_disclosure",
+      "sql_injection",
+      "sql_injection_differential",
+      "sql_injection_timing",
+      "trainer",
+      "unvalidated_redirect",
+      "unvalidated_redirect_dom",
+      "xpath_injection",
+      "xss",
+      "xss_dom",
+      "xss_dom_script_context",
+      "xss_event",
+      "xss_path",
+      "xss_script_context",
+      "xss_tag",
+      "xxe",
+      "allowed_methods",
+      "backdoors",
+      "backup_directories",
+      "backup_files",
+      "common_admin_interfaces",
+      "common_directories",
+      "common_files",
+      "directory_listing",
+      "captcha",
+      "cookie_set_for_parent_domain",
+      "credit_card",
+      "cvs_svn_users",
+      "emails",
+      "form_upload",
+      "hsts",
+      "html_objects",
+      "http_only_cookies",
+      "insecure_cookies",
+      "insecure_cors_policy",
+      "mixed_resource",
+      "password_autocomplete",
+      "private_ip",
+      "ssn",
+      "unencrypted_password_forms",
+      "x_frame_options",
+      "htaccess_limit",
+      "http_put",
+      "insecure_client_access_policy",
+      "insecure_cross_domain_policy_access",
+      "insecure_cross_domain_policy_headers",
+      "interesting_responses",
+      "localstart_asp",
+      "origin_spoof_access_restriction_bypass",
+      "webdav",
+      "xst"
+    ],
+    "platforms" : [],
+    "plugins" : {},
+    "no_fingerprinting" : false,
+    "authorized_by" : null,
+    "url" : "http://52.172.54.204:8000/posts/"
+  },
+  "sitemap" : {
+    "http://52.172.54.204:8000/posts/" : 200
+  },
+  "start_datetime" : "2019-03-13 09:03:33 +0000",
+  "finish_datetime" : "2019-03-13 09:04:22 +0000",
+  "delta_time" : "00:00:49",
+  "issues" : [
+    {
+      "name" : "HTTP TRACE",
+      "description" : "\nThe `TRACE` HTTP method allows a client so send a request to the server, and\nhave the same request then send back in the server's response. This allows the\nclient to determine if the server is receiving the request as expected or if\nspecific parts of the request are not arriving as expected.\nFor example incorrect encoding or a load balancer has filtered or changed a value.\nOn many default installations the `TRACE` method is still enabled.\n\nWhile not vulnerable by itself, it does provide a method for cyber-criminals to\nbypass the `HTTPOnly` cookie flag, and therefore could allow a XSS attack to\nsuccessfully access a session token.\n\nArachni has discovered that the affected page permits the HTTP `TRACE` method.\n",
+      "references" : {
+        "CAPEC" : "http://capec.mitre.org/data/definitions/107.html",
+        "OWASP" : "http://www.owasp.org/index.php/Cross_Site_Tracing"
+      },
+      "tags" : [
+        "xst",
+        "methods",
+        "trace",
+        "server"
+      ],
+      "cwe" : 693,
+      "severity" : "medium",
+      "remedy_guidance" : "\nThe HTTP `TRACE` method is normally not required within production sites and\nshould therefore be disabled.\n\nDepending on the function being performed by the web application, the risk\nlevel can start low and increase as more functionality is implemented.\n\nThe remediation is typically a very simple configuration change and in most cases\nwill not have any negative impact on the server or application.\n",
+      "check" : {
+        "name" : "XST",
+        "description" : "Sends an HTTP TRACE request and checks if it succeeded.",
+        "elements" : [
+          "server"
+        ],
+        "author" : "Tasos \"Zapotek\" Laskos <tasos.laskos@arachni-scanner.com>",
+        "version" : "0.1.8",
+        "shortname" : "xst"
+      },
+      "vector" : {
+        "class" : "Arachni::Element::Server",
+        "type" : "server",
+        "url" : "http://52.172.54.204:8000/posts/",
+        "affected_input_name" : null
+      },
+      "proof" : "HTTP/1.1 200 OK",
+      "referring_page" : {
+        "body" : "<html>\n<head>\n<title>Page Title</title>\n<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css\"/>\n</head>\n<body>\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js\"></script>\n\n\n<div class=\"ui one column grid\">\n  <div class=\"black column\">\n<img src=\"https://www.newstatesman.com/sites/default/files/tcs50_logo_horizontal_colour.png\" class=\"ui medium image\"/>\n  </div>\n\n</div>\n\n<div class=\"ui one column grid\">\n  <div class=\"white column\">\n  <img src=\"https://www.tcs.com/content/dam/tcs/images/pace/hero/Pace-hero-new-web.jpg/_jcr_content/renditions/tcs_1x.jpeg\" height=\"70%\" width=\"100%\"/>\n  </div>\n\n</div>\n\n\n\n<div class=\"ui three column grid\">\n  <div class=\"orange column\">\n\n<img src=\"https://upload.wikimedia.org/wikipedia/en/thumb/b/b1/Tata_Consultancy_Services_Logo.svg/1280px-Tata_Consultancy_Services_Logo.svg.png\" class=\"ui fluid centered image\"/>\n\n  </div>\n  <div class=\"olive column\">\n    <form class=\"ui form\">\n      <div class=\"field\">\n        <label>NAME</label>\n        <input type=\"text\" name=\"first-name\" placeholder=\"Name\">\n      </div>\n      <div class=\"field\">\n        <label>AGE</label>\n        <input type=\"text\" name=\"last-name\" placeholder=\"Age\">\n      </div>\n      <div class=\"field\">\n        <label>JOB</label>\n        <input type=\"text\" name=\"last-name\" placeholder=\"Job\">\n      </div>\n      <div class=\"field\">\n        <div class=\"ui checkbox\">\n          <input type=\"checkbox\" tabindex=\"0\" class=\"hidden\">\n          <label>I agree to the Terms and Conditions</label>\n        </div>\n      </div>\n      <button class=\"ui button\" type=\"submit\">Submit</button>\n    </form>\n\n  </div>\n  <div class=\"red column\">\n\n  <table class=\"ui celled table\">\n    <thead>\n      <tr><th>Name</th>\n      <th>Age</th>\n      <th>Job</th>\n    </tr></thead>\n    <tbody>\n      <tr>\n        <td data-label=\"Name\">James</td>\n        <td data-label=\"Age\">24</td>\n        <td data-label=\"Job\">Engineer</td>\n      </tr>\n      <tr>\n        <td data-label=\"Name\">Jill</td>\n        <td data-label=\"Age\">26</td>\n        <td data-label=\"Job\">Engineer</td>\n      </tr>\n      <tr>\n        <td data-label=\"Name\">Elyse</td>\n        <td data-label=\"Age\">24</td>\n        <td data-label=\"Job\">Designer</td>\n      </tr>\n\n      <tr>\n        <td data-label=\"Name\">Elyse</td>\n        <td data-label=\"Age\">24</td>\n        <td data-label=\"Job\">Designer</td>\n      </tr>\n      <tr>\n        <td data-label=\"Name\">Elyse</td>\n        <td data-label=\"Age\">24</td>\n        <td data-label=\"Job\">Designer</td>\n      </tr>\n      <tr>\n        <td data-label=\"Name\">Elyse</td>\n        <td data-label=\"Age\">24</td>\n        <td data-label=\"Job\">Designer</td>\n      </tr>\n\n\n    </tbody>\n  </table>\n  </div>\n\n\n</div>\n\n<div class=\"ui one column grid\">\n  <div class=\"white column\"></div>\n\n</div>\n\n<div class=\"ui one column grid\">\n  <div class=\"black column\">\n<img src=\"https://www.newstatesman.com/sites/default/files/tcs50_logo_horizontal_colour.png\" class=\"ui medium image\"/>\n  </div>\n\n\n\n</body>\n\n\n</html>\n",
+        "dom" : {
+          "url" : "http://52.172.54.204:8000/posts/",
+          "transitions" : [],
+          "cookies" : [],
+          "digest" : null,
+          "data_flow_sinks" : [],
+          "execution_flow_sinks" : []
+        }
+      },
+      "platform_name" : null,
+      "platform_type" : null,
+      "page" : {
+        "body" : "<html>\n<head>\n<title>Page Title</title>\n<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css\"/>\n</head>\n<body>\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js\"></script>\n\n\n<div class=\"ui one column grid\">\n  <div class=\"black column\">\n<img src=\"https://www.newstatesman.com/sites/default/files/tcs50_logo_horizontal_colour.png\" class=\"ui medium image\"/>\n  </div>\n\n</div>\n\n<div class=\"ui one column grid\">\n  <div class=\"white column\">\n  <img src=\"https://www.tcs.com/content/dam/tcs/images/pace/hero/Pace-hero-new-web.jpg/_jcr_content/renditions/tcs_1x.jpeg\" height=\"70%\" width=\"100%\"/>\n  </div>\n\n</div>\n\n\n\n<div class=\"ui three column grid\">\n  <div class=\"orange column\">\n\n<img src=\"https://upload.wikimedia.org/wikipedia/en/thumb/b/b1/Tata_Consultancy_Services_Logo.svg/1280px-Tata_Consultancy_Services_Logo.svg.png\" class=\"ui fluid centered image\"/>\n\n  </div>\n  <div class=\"olive column\">\n    <form class=\"ui form\">\n      <div class=\"field\">\n        <label>NAME</label>\n        <input type=\"text\" name=\"first-name\" placeholder=\"Name\">\n      </div>\n      <div class=\"field\">\n        <label>AGE</label>\n        <input type=\"text\" name=\"last-name\" placeholder=\"Age\">\n      </div>\n      <div class=\"field\">\n        <label>JOB</label>\n        <input type=\"text\" name=\"last-name\" placeholder=\"Job\">\n      </div>\n      <div class=\"field\">\n        <div class=\"ui checkbox\">\n          <input type=\"checkbox\" tabindex=\"0\" class=\"hidden\">\n          <label>I agree to the Terms and Conditions</label>\n        </div>\n      </div>\n      <button class=\"ui button\" type=\"submit\">Submit</button>\n    </form>\n\n  </div>\n  <div class=\"red column\">\n\n  <table class=\"ui celled table\">\n    <thead>\n      <tr><th>Name</th>\n      <th>Age</th>\n      <th>Job</th>\n    </tr></thead>\n    <tbody>\n      <tr>\n        <td data-label=\"Name\">James</td>\n        <td data-label=\"Age\">24</td>\n        <td data-label=\"Job\">Engineer</td>\n      </tr>\n      <tr>\n        <td data-label=\"Name\">Jill</td>\n        <td data-label=\"Age\">26</td>\n        <td data-label=\"Job\">Engineer</td>\n      </tr>\n      <tr>\n        <td data-label=\"Name\">Elyse</td>\n        <td data-label=\"Age\">24</td>\n        <td data-label=\"Job\">Designer</td>\n      </tr>\n\n      <tr>\n        <td data-label=\"Name\">Elyse</td>\n        <td data-label=\"Age\">24</td>\n        <td data-label=\"Job\">Designer</td>\n      </tr>\n      <tr>\n        <td data-label=\"Name\">Elyse</td>\n        <td data-label=\"Age\">24</td>\n        <td data-label=\"Job\">Designer</td>\n      </tr>\n      <tr>\n        <td data-label=\"Name\">Elyse</td>\n        <td data-label=\"Age\">24</td>\n        <td data-label=\"Job\">Designer</td>\n      </tr>\n\n\n    </tbody>\n  </table>\n  </div>\n\n\n</div>\n\n<div class=\"ui one column grid\">\n  <div class=\"white column\"></div>\n\n</div>\n\n<div class=\"ui one column grid\">\n  <div class=\"black column\">\n<img src=\"https://www.newstatesman.com/sites/default/files/tcs50_logo_horizontal_colour.png\" class=\"ui medium image\"/>\n  </div>\n\n\n\n</body>\n\n\n</html>\n",
+        "dom" : {
+          "url" : "http://52.172.54.204:8000/posts/",
+          "transitions" : [],
+          "cookies" : [],
+          "digest" : null,
+          "data_flow_sinks" : [],
+          "execution_flow_sinks" : []
+        }
+      },
+      "remarks" : {},
+      "trusted" : true,
+      "cwe_url" : "http://cwe.mitre.org/data/definitions/693.html",
+      "digest" : 1461589635,
+      "response" : {
+        "headers" : {
+          "Date" : "Wed, 13 Mar 2019 09:03:53 GMT",
+          "Server" : "WSGIServer/0.2 CPython/3.6.8",
+          "Content-Type" : "text/html; charset=utf-8",
+          "X-Frame-Options" : "SAMEORIGIN",
+          "Content-Length" : "3052"
+        },
+        "url" : "http://52.172.54.204:8000/posts/",
+        "code" : 200,
+        "ip_address" : "52.172.54.204",
+        "headers_string" : "HTTP/1.1 200 OK\r\nDate: Wed, 13 Mar 2019 09:03:53 GMT\r\nServer: WSGIServer/0.2 CPython/3.6.8\r\nContent-Type: text/html; charset=utf-8\r\nX-Frame-Options: SAMEORIGIN\r\nContent-Length: 3052\r\n\r\n",
+        "body" : "<html>\n<head>\n<title>Page Title</title>\n<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css\"/>\n</head>\n<body>\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js\"></script>\n\n\n<div class=\"ui one column grid\">\n  <div class=\"black column\">\n<img src=\"https://www.newstatesman.com/sites/default/files/tcs50_logo_horizontal_colour.png\" class=\"ui medium image\"/>\n  </div>\n\n</div>\n\n<div class=\"ui one column grid\">\n  <div class=\"white column\">\n  <img src=\"https://www.tcs.com/content/dam/tcs/images/pace/hero/Pace-hero-new-web.jpg/_jcr_content/renditions/tcs_1x.jpeg\" height=\"70%\" width=\"100%\"/>\n  </div>\n\n</div>\n\n\n\n<div class=\"ui three column grid\">\n  <div class=\"orange column\">\n\n<img src=\"https://upload.wikimedia.org/wikipedia/en/thumb/b/b1/Tata_Consultancy_Services_Logo.svg/1280px-Tata_Consultancy_Services_Logo.svg.png\" class=\"ui fluid centered image\"/>\n\n  </div>\n  <div class=\"olive column\">\n    <form class=\"ui form\">\n      <div class=\"field\">\n        <label>NAME</label>\n        <input type=\"text\" name=\"first-name\" placeholder=\"Name\">\n      </div>\n      <div class=\"field\">\n        <label>AGE</label>\n        <input type=\"text\" name=\"last-name\" placeholder=\"Age\">\n      </div>\n      <div class=\"field\">\n        <label>JOB</label>\n        <input type=\"text\" name=\"last-name\" placeholder=\"Job\">\n      </div>\n      <div class=\"field\">\n        <div class=\"ui checkbox\">\n          <input type=\"checkbox\" tabindex=\"0\" class=\"hidden\">\n          <label>I agree to the Terms and Conditions</label>\n        </div>\n      </div>\n      <button class=\"ui button\" type=\"submit\">Submit</button>\n    </form>\n\n  </div>\n  <div class=\"red column\">\n\n  <table class=\"ui celled table\">\n    <thead>\n      <tr><th>Name</th>\n      <th>Age</th>\n      <th>Job</th>\n    </tr></thead>\n    <tbody>\n      <tr>\n        <td data-label=\"Name\">James</td>\n        <td data-label=\"Age\">24</td>\n        <td data-label=\"Job\">Engineer</td>\n      </tr>\n      <tr>\n        <td data-label=\"Name\">Jill</td>\n        <td data-label=\"Age\">26</td>\n        <td data-label=\"Job\">Engineer</td>\n      </tr>\n      <tr>\n        <td data-label=\"Name\">Elyse</td>\n        <td data-label=\"Age\">24</td>\n        <td data-label=\"Job\">Designer</td>\n      </tr>\n\n      <tr>\n        <td data-label=\"Name\">Elyse</td>\n        <td data-label=\"Age\">24</td>\n        <td data-label=\"Job\">Designer</td>\n      </tr>\n      <tr>\n        <td data-label=\"Name\">Elyse</td>\n        <td data-label=\"Age\">24</td>\n        <td data-label=\"Job\">Designer</td>\n      </tr>\n      <tr>\n        <td data-label=\"Name\">Elyse</td>\n        <td data-label=\"Age\">24</td>\n        <td data-label=\"Job\">Designer</td>\n      </tr>\n\n\n    </tbody>\n  </table>\n  </div>\n\n\n</div>\n\n<div class=\"ui one column grid\">\n  <div class=\"white column\"></div>\n\n</div>\n\n<div class=\"ui one column grid\">\n  <div class=\"black column\">\n<img src=\"https://www.newstatesman.com/sites/default/files/tcs50_logo_horizontal_colour.png\" class=\"ui medium image\"/>\n  </div>\n\n\n\n</body>\n\n\n</html>\n",
+        "time" : 0.019449,
+        "app_time" : 0.017625,
+        "total_time" : 0.019449,
+        "return_code" : "ok",
+        "return_message" : "No error",
+        "status_line" : "HTTP/1.1 200 OK"
+      },
+      "request" : {
+        "url" : "http://52.172.54.204:8000/posts/",
+        "parameters" : {},
+        "headers" : {
+          "Accept" : "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+          "User-Agent" : "Arachni/v1.5.1",
+          "Accept-Language" : "en-US,en;q=0.8,he;q=0.6",
+          "X-Arachni-Scan-Seed" : "6b1a57b3e9438abf9516a33d4967cd80"
+        },
+        "headers_string" : "TRACE /posts/ HTTP/1.1\r\nHost: 52.172.54.204:8000\r\nAccept-Encoding: gzip, deflate\r\nUser-Agent: Arachni/v1.5.1\r\nAccept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\r\nAccept-Language: en-US,en;q=0.8,he;q=0.6\r\nX-Arachni-Scan-Seed: 6b1a57b3e9438abf9516a33d4967cd80\r\n\r\n",
+        "effective_body" : null,
+        "body" : null,
+        "method" : "trace"
+      }
+    }
+  ],
+  "plugins" : {}
