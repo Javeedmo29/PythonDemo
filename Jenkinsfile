@@ -72,6 +72,8 @@ pipeline {
          steps {
            /* arachniScanner checks: '*', scope: [pageLimit: 3], url: 'http://52.172.25.128:8000/posts/', userConfig: [filename: 'myConfiguration.json'], format: 'json'
             */
+            sh "rm arachni-report.json" 
+            sh "rm arachni-report-json.zip" 
             sh "unzip arachni-report-json.zip arachni-report.json"
             step([$class: 'ArtifactArchiver', artifacts: 'arachni-report.json'])
             
