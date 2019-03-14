@@ -57,7 +57,7 @@ pipeline {
        
        
              
-    stage('Run Container') {
+    /*stage('Run Container') {
       steps {
         sh 'docker run --name=java-app --privileged -d -p 8000:8000 -v /var/run/docker.sock:/var/run/docker.sock $registry:$BUILD_NUMBER &'
       }
@@ -66,12 +66,12 @@ pipeline {
       steps{
         sh "docker rmi -f $registry:$BUILD_NUMBER"
       }
-    }
+    }*/
 
        stage('ARACHNI Scanning') {
          steps {
-            arachniScanner checks: '*', scope: [pageLimit: 3], url: 'http://52.172.25.128:8000/posts/', userConfig: [filename: 'myConfiguration.json'], format: 'json'
-            
+           /* arachniScanner checks: '*', scope: [pageLimit: 3], url: 'http://52.172.25.128:8000/posts/', userConfig: [filename: 'myConfiguration.json'], format: 'json'
+            */
             unzip zipFile: 'arachni-report-json.zip'
             step([$class: 'ArtifactArchiver', artifacts: 'arachni-report.json'])
             
